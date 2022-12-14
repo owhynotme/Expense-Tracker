@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
               ),
 
               Image.asset(
-                'images/Login_illus.jpg',
+                'assets/images/Login_illus.jpg',
                 // fit: BoxFit.none,
                 height: 300,
                 width: 600,

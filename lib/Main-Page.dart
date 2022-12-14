@@ -1,6 +1,7 @@
-import 'package:expensetracker/Home-Page.dart';
+import 'package:expensetracker/UI-Homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'Home-Page.dart';
 import 'login-page.dart';
 
 class MainPage extends StatelessWidget {

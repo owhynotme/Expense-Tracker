@@ -1,9 +1,8 @@
-import 'package:expensetracker/User-Card.dart';
-import 'package:expensetracker/pages/Home.dart';
-import 'package:expensetracker/pages/Search.dart';
+import 'package:expensetracker/UI-Homepage.dart';
 import 'package:expensetracker/pages/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'UI-Homepage.dart';
 // import 'package:expense/pages/Home.dart';
 // import 'package:temp/pages/Search.dart';
 // import 'package:temp/pages/Settings.dart';
@@ -25,7 +24,7 @@ class _NavPageState extends State<NavPage> {
   final List<Widget> _pages = [
     // Homie(),
     // Search(),
-    cardUI(),
+    UIhomePage(),
     Center(
       child: Text('Search Page'),
     ),

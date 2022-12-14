@@ -51,8 +51,10 @@ class UIhomePage extends StatelessWidget {
                   child: Column(
                     children: [
                       // TransPage(),
-                      
-                      
+                      TransPage(
+                          transactionName: 'Teaching',
+                          amount: 800,
+                          incomeExpense: 'income'),
                     ],
                   ),
                 ),

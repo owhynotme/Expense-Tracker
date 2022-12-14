@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class cardUI extends StatelessWidget {
   const cardUI({super.key});
-
+  // cardUI({required this.balance});
   @override
   Widget build(BuildContext context) {
     final int balance = 6900;

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TransPage extends StatelessWidget {
-  // final String transactionName;
-  // final int amount;
-  // final String incomeExpense;
-  // // final String comments;
+  final String transactionName;
+  final int amount;
+  final String incomeExpense;
+  // final String comments;
 
-  // MyTransaction({
-  //   required this.transactionName,
-  //   required this.money,
-  //   required this.expenseOrIncome,
-  // });
+  TransPage({
+    required this.transactionName,
+    required this.amount,
+    required this.incomeExpense,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +26,16 @@ class TransPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //   Text(transactionName),
-                //   Text('\u{20B9} $amount'),
-                Text('transactionName'),
-                Text('\u{20B9} 99'),
+                // Icon(Icons.cash)
+                Text(transactionName,
+                    style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w600, fontSize: 17)),
+                // Text(),
+                Text(
+                    (incomeExpense == 'income' ? '+ ' : '- ') +
+                        '\u{20B9} $amount',
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w600, fontSize: 17)),
               ],
             ),
           ),

@@ -45,24 +45,19 @@ class UIhomePage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Column(
-                children: [
-                  // Container(
-                  //   height: 70,
-                  //   // width: 600,
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.black,
-                  //     borderRadius: BorderRadius.circular(70),
-                  //   ),
-                  // ),
-
-                  SizedBox(
-                    height: 10,
+              Expanded(
+                  child: Container(
+                child: Center(
+                  child: Column(
+                    children: [
+                      // TransPage(),
+                      
+                      
+                    ],
                   ),
-                  // Text('Transactions Part'),
-                  TransPage(),
-                ],
-              ),
+                ),
+              )),
+
               addTrans(),
             ],
           ),

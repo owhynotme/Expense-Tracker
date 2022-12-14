@@ -5,12 +5,17 @@ class addTrans extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Text('Button'),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Container(
+        height: 35,
+        width: 35,
+        decoration:
+            BoxDecoration(color: Colors.grey[500], shape: BoxShape.circle),
+        child: Center(
+          child: Text('+'),
+        ),
+      ),
     );
   }
 }

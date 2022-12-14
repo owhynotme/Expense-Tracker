@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class cardUI extends StatelessWidget {
   const cardUI({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String balance = "6900";
+    final int balance = 6900;
 
     return Container(
       height: 215,
@@ -90,6 +89,7 @@ class cardUI extends StatelessWidget {
                     ),
 
                     Text(
+                      // '\u{20B9}${balance}',
                       '\u{20B9}${balance}',
                       style: GoogleFonts.robotoMono(
                           color: Colors.white,

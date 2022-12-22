@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:expensetracker/Plus-Button.dart';
 import 'package:expensetracker/User-card.dart';
+import 'package:expensetracker/pages/loading-page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gsheets/gsheets.dart';
+import 'Google-Sheets-API.dart';
 
 import 'Trasactions.dart';
 // import 'Transaction.dart';
@@ -76,20 +79,33 @@ class _UIhomePageState extends State<UIhomePage> {
                     child: Column(
                       children: [
                         // TransPage(),
+                        // Expanded(
+                        //   child: ListView.builder(
+                        //     itemCount: GoogleSheetsApi.currentTransactions.length,
+                        //       itemBuilder: ((BuildContext context, int index) {
+                        //     return ListTile(
+                        //       leading: Icon(Icons.person),
+                        //       trailing: Icon(Icons.phone_android),
+                        //       title: Text('Call $index'),
+                        //     );
+                        //   })),
+                        // ),
+
                         Expanded(
-                          child: ListView.builder(
-                              itemBuilder: ((BuildContext context, int index) {
-                            // itemCount:
-                            // GoogleSheetsApi.currentTransactions.length.compareTo(0);
-                            return TransPage(
-                                transactionName: GoogleSheetsApi
-                                    .currentTransactions[index][0],
-                                amount: GoogleSheetsApi
-                                    .currentTransactions[index][1],
-                                incomeExpense: GoogleSheetsApi
-                                    .currentTransactions[index][2]);
-                          })),
-                        )
+                          child: GoogleSheetsApi.loading==true?loadingind() : ListView.builder(
+                            itemCount:
+                                GoogleSheetsApi.currentTransactions.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return TransPage(
+                                  transactionName: GoogleSheetsApi
+                                      .currentTransactions[index][0],
+                                  amount: GoogleSheetsApi
+                                      .currentTransactions[index][1],
+                                  incomeExpense: GoogleSheetsApi
+                                      .currentTransactions[index][2]);
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -9,9 +9,9 @@ class cardUI extends StatelessWidget {
     final int balance = 6900;
 
     return Container(
-      height: 215,
+      height: 224,
       // color: Colors.grey,
-      child: GestureDetector(
+      child: Expanded(
         child: Container(
           decoration: BoxDecoration(
             color: Colors.black,

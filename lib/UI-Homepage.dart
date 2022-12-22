@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:expensetracker/Plus-Button.dart';
 import 'package:expensetracker/User-card.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +9,33 @@ import 'package:google_fonts/google_fonts.dart';
 import 'Trasactions.dart';
 // import 'Transaction.dart';
 
-class UIhomePage extends StatelessWidget {
+class UIhomePage extends StatefulWidget {
   const UIhomePage({super.key});
 
   @override
+  State<UIhomePage> createState() => _UIhomePageState();
+}
+
+class _UIhomePageState extends State<UIhomePage> {
+  // wait for the data to be fetched from google sheets
+  bool timerHasStarted = false;
+
+  void startLoading() {
+    timerHasStarted = true;
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      if (GoogleSheetsApi.loading == false) {
+        setState(() {});
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (GoogleSheetsApi.loading == true && timerHasStarted == false) {
+      startLoading();
+    }
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(238, 241, 242, 1),
       appBar: AppBar(
@@ -43,22 +68,33 @@ class UIhomePage extends StatelessWidget {
               // cardUI(),
               cardUI(),
               SizedBox(
-                height: 10,
+                height: 25,
               ),
               Expanded(
-                  child: Container(
-                child: Center(
-                  child: Column(
-                    children: [
-                      // TransPage(),
-                      TransPage(
-                          transactionName: 'Teaching',
-                          amount: 800,
-                          incomeExpense: 'income'),
-                    ],
+                child: Container(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        // TransPage(),
+                        Expanded(
+                          child: ListView.builder(
+                              itemBuilder: ((BuildContext context, int index) {
+                            // itemCount:
+                            // GoogleSheetsApi.currentTransactions.length.compareTo(0);
+                            return TransPage(
+                                transactionName: GoogleSheetsApi
+                                    .currentTransactions[index][0],
+                                amount: GoogleSheetsApi
+                                    .currentTransactions[index][1],
+                                incomeExpense: GoogleSheetsApi
+                                    .currentTransactions[index][2]);
+                          })),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              )),
+              ),
 
               addTrans(),
             ],

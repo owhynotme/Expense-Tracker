@@ -26,16 +26,27 @@ class TransPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Icon(Icons.cash)
-                Text(transactionName,
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w600, fontSize: 17)),
+                Image.asset(
+                  'assets/images/rupee_icon.png',
+                  height: 30,
+                  width: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 110),
+                  child: Text(transactionName,
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w600, fontSize: 20)),
+                ),
                 // Text(),
                 Text(
                     (incomeExpense == 'income' ? '+ ' : '- ') +
                         '\u{20B9} $amount',
                     style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w600, fontSize: 17)),
+                        fontWeight: FontWeight.w800,
+                        fontSize: 20,
+                        color: (incomeExpense == 'income'
+                            ? Colors.green[400]
+                            : Colors.red[800]))),
               ],
             ),
           ),

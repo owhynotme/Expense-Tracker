@@ -161,53 +161,101 @@ class _UIhomePageState extends State<UIhomePage> {
                       builder: (context) {
                         final enter_Amount = TextEditingController();
                         final enter_Transaction = TextEditingController();
-                        return AlertDialog(
-                          title: Text('New Transactions'),
-                          content: Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextFormField(
-                                  controller: enter_Amount,
-                                  validator: (value) {
-                                    // return value?.isEmpty ? null:"Enter Amount";
-                                    return value!.isNotEmpty ? null : "Amount?";
-                                  },
-                                  decoration:
-                                      InputDecoration(hintText: 'Enter Amount'),
-                                ),
-                                TextFormField(
-                                  controller: enter_Transaction,
-                                  validator: (value) {
-                                    // return value?.isEmpty ? null:"Enter Amount";
-                                    return value!.isNotEmpty
-                                        ? null
-                                        : "Transaction Name?";
-                                  },
-                                  decoration: InputDecoration(
-                                      hintText: 'Enter Transaction Name'),
-                                ),
-                              ],
+                        bool isChecked = false;
+                        bool isIncome = false;
+                        return StatefulBuilder(builder: (context, setState) {
+                          return AlertDialog(
+                            title: Text(
+                              'NEW TRANSACTION',
                             ),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: (() {
-                                Navigator.pop(context);
-                              }),
-                              child: Text('Cancel?'),
+                            content: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text('Expense'),
+                                      Switch(
+                                        value: isIncome,
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            isIncome = newValue;
+                                          });
+                                        },
+                                      ),
+                                      Text('Income'),
+                                    ],
+                                  ),
+                                  TextFormField(
+                                    controller: enter_Amount,
+                                    validator: (value) {
+                                      // return value?.isEmpty ? null:"Enter Amount";
+                                      return value!.isNotEmpty
+                                          ? null
+                                          : "Amount?";
+                                    },
+                                    decoration: InputDecoration(
+                                        hintText: 'Enter Amount',
+                                        border: OutlineInputBorder()),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  TextFormField(
+                                    controller: enter_Transaction,
+                                    validator: (value) {
+                                      // return value?.isEmpty ? null:"Enter Amount";
+                                      return value!.isNotEmpty
+                                          ? null
+                                          : "Transaction Name?";
+                                    },
+                                    decoration: InputDecoration(
+                                        hintText: 'Enter Transaction Name',
+                                        border: OutlineInputBorder()),
+                                  ),
+                                ],
+                              ),
                             ),
-                            TextButton(
-                              child: Text('Submit'),
-                              onPressed: (() {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.pop(context);
-                                }
-                              }),
-                            )
-                          ],
-                        );
+                            actions: <Widget>[
+                              // Row(
+                              //   children: [
+                              //     Checkbox(
+                              //       value: isChecked,
+                              //       onChanged: (checked) {
+                              //         setState(
+                              //           () {
+                              //             isChecked = checked!;
+                              //           },
+                              //         );
+                              //       },
+                              //     )
+                              //   ],
+                              // ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    onPressed: (() {
+                                      Navigator.pop(context);
+                                    }),
+                                    child: Text('Cancel?'),
+                                  ),
+                                  TextButton(
+                                    child: Text('Submit'),
+                                    onPressed: (() {
+                                      if (_formKey.currentState!.validate()) {
+                                        Navigator.pop(context);
+                                      }
+                                    }),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        });
                       },
                     );
                   },

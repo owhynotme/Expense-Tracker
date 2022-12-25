@@ -22,6 +22,7 @@ class UIhomePage extends StatefulWidget {
 class _UIhomePageState extends State<UIhomePage> {
   // wait for the data to be fetched from google sheets
   bool timerHasStarted = false;
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void startLoading() {
     timerHasStarted = true;
@@ -32,6 +33,26 @@ class _UIhomePageState extends State<UIhomePage> {
       }
     });
   }
+
+  // New Transactions
+  // Future<void> newTransactions(BuildContext context) async {
+  //   return await showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         content: Text('New Transactions'),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             onPressed: (() {
+  //               Navigator.pop(context);
+  //             }),
+  //             child: Text('Cancel?'),
+  //           )
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -90,21 +111,36 @@ class _UIhomePageState extends State<UIhomePage> {
                         //     );
                         //   })),
                         // ),
-
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Transactions',
+                              style: GoogleFonts.roboto(
+                                  fontSize: 20, fontWeight: FontWeight.w800),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Expanded(
-                          child: GoogleSheetsApi.loading==true?loadingind() : ListView.builder(
-                            itemCount:
-                                GoogleSheetsApi.currentTransactions.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return TransPage(
-                                  transactionName: GoogleSheetsApi
-                                      .currentTransactions[index][0],
-                                  amount: GoogleSheetsApi
-                                      .currentTransactions[index][1],
-                                  incomeExpense: GoogleSheetsApi
-                                      .currentTransactions[index][2]);
-                            },
-                          ),
+                          child: GoogleSheetsApi.loading == true
+                              ? loadingind()
+                              : ListView.builder(
+                                  itemCount: GoogleSheetsApi
+                                      .currentTransactions.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return TransPage(
+                                        transactionName: GoogleSheetsApi
+                                            .currentTransactions[index][0],
+                                        amount: GoogleSheetsApi
+                                            .currentTransactions[index][1],
+                                        incomeExpense: GoogleSheetsApi
+                                            .currentTransactions[index][2]);
+                                  },
+                                ),
                         ),
                       ],
                     ),
@@ -112,7 +148,81 @@ class _UIhomePageState extends State<UIhomePage> {
                 ),
               ),
 
-              addTrans(),
+              // addTrans(
+              //   addFunction: newTransactions,
+              // ),
+
+              Container(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // await showAboutDialog(context);
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        final enter_Amount = TextEditingController();
+                        final enter_Transaction = TextEditingController();
+                        return AlertDialog(
+                          title: Text('New Transactions'),
+                          content: Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                TextFormField(
+                                  controller: enter_Amount,
+                                  validator: (value) {
+                                    // return value?.isEmpty ? null:"Enter Amount";
+                                    return value!.isNotEmpty ? null : "Amount?";
+                                  },
+                                  decoration:
+                                      InputDecoration(hintText: 'Enter Amount'),
+                                ),
+                                TextFormField(
+                                  controller: enter_Transaction,
+                                  validator: (value) {
+                                    // return value?.isEmpty ? null:"Enter Amount";
+                                    return value!.isNotEmpty
+                                        ? null
+                                        : "Transaction Name?";
+                                  },
+                                  decoration: InputDecoration(
+                                      hintText: 'Enter Transaction Name'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: (() {
+                                Navigator.pop(context);
+                              }),
+                              child: Text('Cancel?'),
+                            ),
+                            TextButton(
+                              child: Text('Submit'),
+                              onPressed: (() {
+                                if (_formKey.currentState!.validate()) {
+                                  Navigator.pop(context);
+                                }
+                              }),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Text(
+                    '+',
+                    style: TextStyle(fontSize: 25, color: Colors.black),
+                  ),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

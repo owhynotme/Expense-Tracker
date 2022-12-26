@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:expensetracker/Google-Sheets-API.dart';
-import 'package:expensetracker/Plus-Button.dart';
 import 'package:expensetracker/User-card.dart';
 import 'package:expensetracker/pages/loading-page.dart';
 import 'package:flutter/material.dart';
@@ -263,7 +262,7 @@ class _UIhomePageState extends State<UIhomePage> {
                                   ),
 
                                   MaterialButton(
-                                    color: Colors.grey[600],
+                                    color: Colors.grey[400],
                                     child: Text('Enter',
                                         style: TextStyle(color: Colors.white)),
                                     onPressed: () {

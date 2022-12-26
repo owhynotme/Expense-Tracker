@@ -23,6 +23,10 @@ class _UIhomePageState extends State<UIhomePage> {
   // wait for the data to be fetched from google sheets
   bool timerHasStarted = false;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final enter_Amount = TextEditingController();
+  final enter_Transaction = TextEditingController();
+  bool isChecked = false;
+  bool isIncome = false;
 
   void startLoading() {
     timerHasStarted = true;
@@ -34,25 +38,24 @@ class _UIhomePageState extends State<UIhomePage> {
     });
   }
 
-  // New Transactions
-  // Future<void> newTransactions(BuildContext context) async {
-  //   return await showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //         content: Text('New Transactions'),
-  //         actions: <Widget>[
-  //           TextButton(
-  //             onPressed: (() {
-  //               Navigator.pop(context);
-  //             }),
-  //             child: Text('Cancel?'),
-  //           )
-  //         ],
-  //       );
-  //     },
+  void tempPrint() {}
+// New Transactions
+  // void enterTransaction() {
+  //   GoogleSheetsApi.insertTrans(
+  //     'YouTube',
+  //     '230',
+  //     true,
   //   );
+  //   setState(() {});
   // }
+  void enterTransaction() {
+    GoogleSheetsApi.insert(
+      enter_Transaction.text,
+      enter_Amount.text,
+      isIncome,
+    );
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,10 +151,6 @@ class _UIhomePageState extends State<UIhomePage> {
                 ),
               ),
 
-              // addTrans(
-              //   addFunction: newTransactions,
-              // ),
-
               Container(
                 child: ElevatedButton(
                   onPressed: () {
@@ -159,10 +158,6 @@ class _UIhomePageState extends State<UIhomePage> {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        final enter_Amount = TextEditingController();
-                        final enter_Transaction = TextEditingController();
-                        bool isChecked = false;
-                        bool isIncome = false;
                         return StatefulBuilder(builder: (context, setState) {
                           return AlertDialog(
                             title: Text(
@@ -190,7 +185,6 @@ class _UIhomePageState extends State<UIhomePage> {
                                     ],
                                   ),
                                   TextFormField(
-                                    controller: enter_Amount,
                                     validator: (value) {
                                       // return value?.isEmpty ? null:"Enter Amount";
                                       return value!.isNotEmpty
@@ -200,12 +194,12 @@ class _UIhomePageState extends State<UIhomePage> {
                                     decoration: InputDecoration(
                                         hintText: 'Enter Amount',
                                         border: OutlineInputBorder()),
+                                    controller: enter_Amount,
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
                                   TextFormField(
-                                    controller: enter_Transaction,
                                     validator: (value) {
                                       // return value?.isEmpty ? null:"Enter Amount";
                                       return value!.isNotEmpty
@@ -215,6 +209,7 @@ class _UIhomePageState extends State<UIhomePage> {
                                     decoration: InputDecoration(
                                         hintText: 'Enter Transaction Name',
                                         border: OutlineInputBorder()),
+                                    controller: enter_Transaction,
                                   ),
                                 ],
                               ),
@@ -236,20 +231,47 @@ class _UIhomePageState extends State<UIhomePage> {
                               // ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
+                                // crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  TextButton(
-                                    onPressed: (() {
-                                      Navigator.pop(context);
-                                    }),
-                                    child: Text('Cancel?'),
+                                  // TextButton(
+                                  //   onPressed: (() {
+                                  //     Navigator.pop(context);
+                                  //   }),
+                                  //   child: Text('Cancel'),
+                                  // ),
+
+                                  // TextButton(
+                                  //   child: Text('Submit'),
+                                  //   onPressed: (() {
+                                  //     if (_formKey.currentState!.validate()) {
+                                  //       enter_Transaction;
+                                  //       Navigator.pop(context);
+                                  //     }
+                                  //   }),
+                                  // ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: MaterialButton(
+                                      // color: Colors.grey[600],
+                                      child: Text('Cancel',
+                                          style:
+                                              TextStyle(color: Colors.black)),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
                                   ),
-                                  TextButton(
-                                    child: Text('Submit'),
-                                    onPressed: (() {
+
+                                  MaterialButton(
+                                    color: Colors.grey[600],
+                                    child: Text('Enter',
+                                        style: TextStyle(color: Colors.white)),
+                                    onPressed: () {
                                       if (_formKey.currentState!.validate()) {
-                                        Navigator.pop(context);
+                                        enterTransaction();
+                                        Navigator.of(context).pop();
                                       }
-                                    }),
+                                    },
                                   ),
                                 ],
                               ),

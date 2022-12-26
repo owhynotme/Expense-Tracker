@@ -72,7 +72,7 @@ class TransPage extends StatelessWidget {
                   //         fontWeight: FontWeight.w800,
                   //         fontSize: 17,
                   //         color: (incomeExpense == 'income'
-                  //             ? Colors.green[400]
+                              // ? Colors.green[400]
                   //             : Colors.red[800]))),
                 ],
               ),

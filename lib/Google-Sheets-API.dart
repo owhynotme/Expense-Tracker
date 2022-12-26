@@ -27,7 +27,6 @@ class GoogleSheetsApi {
   static List<List<dynamic>> currentTransactions = [];
   static bool loading = true;
 
-
 // initialise the spreadsheet!
   Future init() async {
     final ss = await _gsheets.spreadsheet(spreashsheet_id);
@@ -69,5 +68,36 @@ class GoogleSheetsApi {
     // print(currentTransactions);
     // this will stop the circular loading indicator
     loading = false;
+  }
+
+  // Adding new Transaction in the Sheet
+  // static Future insertTrans(String name, String amount, bool isincome) async {
+  //   if (_worksheet == null) return;
+  //   numberOfTransactions++;
+  //   currentTransactions.add([
+  //     name,
+  //     amount,
+  //     isincome == true ? 'income' : 'expense',
+  //   ]);
+  //   await _worksheet!.values.appendRow([
+  //     name,
+  //     amount,
+  //     isincome == true ? 'income' : 'expense',
+  //   ]);
+  // }
+  // insert a new transaction
+  static Future insert(String name, String amount, bool _isIncome) async {
+    if (_worksheet == null) return;
+    numberOfTransactions++;
+    currentTransactions.add([
+      name,
+      amount,
+      _isIncome == true ? 'income' : 'expense',
+    ]);
+    await _worksheet!.values.appendRow([
+      name,
+      amount,
+      _isIncome == true ? 'income' : 'expense',
+    ]);
   }
 }

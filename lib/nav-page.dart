@@ -3,6 +3,8 @@ import 'package:expensetracker/pages/Settings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'UI-Homepage.dart';
+import 'package:expensetracker/News/Newspage.dart';
+// import 'package:expensetracker/News/Newspage.dart';
 // import 'package:expense/pages/Home.dart';
 // import 'package:temp/pages/Search.dart';
 // import 'package:temp/pages/Settings.dart';
@@ -25,9 +27,7 @@ class _NavPageState extends State<NavPage> {
     // Homie(),
     // Search(),
     UIhomePage(),
-    Center(
-      child: Text('Search Page'),
-    ),
+    News(),
     Settings(),
     // Center(child: Text('Settings Page'),),
   ];
@@ -63,8 +63,8 @@ class _NavPageState extends State<NavPage> {
                 //   text: 'Likes',
                 // ),
                 GButton(
-                  icon: Icons.search,
-                  text: 'Search',
+                  icon: Icons.newspaper,
+                  text: 'Insights',
                 ),
                 GButton(
                   icon: Icons.settings,

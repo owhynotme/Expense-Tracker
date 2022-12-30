@@ -21,6 +21,7 @@ class TransPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         child: Container(
           color: Colors.grey[300],
+          // color: Colors.deepPurple[100],
           height: 70,
           child: Center(
             child: Padding(
@@ -72,7 +73,7 @@ class TransPage extends StatelessWidget {
                   //         fontWeight: FontWeight.w800,
                   //         fontSize: 17,
                   //         color: (incomeExpense == 'income'
-                              // ? Colors.green[400]
+                  // ? Colors.green[400]
                   //             : Colors.red[800]))),
                 ],
               ),

@@ -20,21 +20,30 @@ class GoogleSheetsApi {
   // set up & connect to the spreadsheet
   final spreashsheet_id = '1cwUtZqNg1vdzrdOFZjLapW4rrlCU73xkw-lQaZEJk7I';
   static final _gsheets = GSheets(_credentials);
-  static Worksheet? _worksheet;
+  static Worksheet? _worksheet, worksheet2;
 
   // some variables to keep track of..
   static int numberOfTransactions = 0;
   static List<List<dynamic>> currentTransactions = [];
   static bool loading = true;
 
+  // Variable
+  static int numberOfNews = 0;
+  static List<List<dynamic>> currentNews = [];
+  static bool loading2 = true;
+
 // initialise the spreadsheet!
   Future init() async {
     final ss = await _gsheets.spreadsheet(spreashsheet_id);
     _worksheet = ss.worksheetByTitle('Worksheet1');
+    worksheet2 = ss.worksheetByTitle('NewsAPI');
+    // print(await worksheet2!.values.value(row: 2, column: 1));
+    // print(await worksheet2!.values.value(row: 2, column: 2));
     countRows();
+    countRows2();
   }
 
-  // count the number of notes
+  // count the number of rows 1
   static Future countRows() async {
     while ((await _worksheet!.values
             .value(column: 1, row: numberOfTransactions + 1)) !=
@@ -43,6 +52,16 @@ class GoogleSheetsApi {
     }
     // now we know how many notes to load, now let's load them!
     loadTransactions();
+  }
+
+  // count the number of rows 2
+  static Future countRows2() async {
+    while ((await _worksheet!.values.value(column: 1, row: numberOfNews + 1)) !=
+        '') {
+      numberOfNews++;
+    }
+    // now we know how many notes to load, now let's load them!
+    loadNews();
   }
 
   // load existing notes from the spreadsheet
@@ -70,21 +89,28 @@ class GoogleSheetsApi {
     loading = false;
   }
 
-  // Adding new Transaction in the Sheet
-  // static Future insertTrans(String name, String amount, bool isincome) async {
-  //   if (_worksheet == null) return;
-  //   numberOfTransactions++;
-  //   currentTransactions.add([
-  //     name,
-  //     amount,
-  //     isincome == true ? 'income' : 'expense',
-  //   ]);
-  //   await _worksheet!.values.appendRow([
-  //     name,
-  //     amount,
-  //     isincome == true ? 'income' : 'expense',
-  //   ]);
-  // }
+  // load existing notes from the spreadsheet
+  static Future loadNews() async {
+    if (_worksheet == null) return;
+
+    for (int i = 1; i < numberOfNews; i++) {
+      final String newsName =
+          await _worksheet!.values.value(column: 1, row: i + 1);
+      // final String newsDesc =
+      //     await _worksheet!.values.value(column: 2, row: i + 1);
+
+      if (currentNews.length < numberOfNews) {
+        currentNews.add([
+          newsName,
+          // newsDesc,
+        ]);
+      }
+    }
+    // print(currentTransactions);
+    // this will stop the circular loading indicator
+    loading2 = false;
+  }
+
   // insert a new transaction
   static Future insert(String name, String amount, bool _isIncome) async {
     if (_worksheet == null) return;
@@ -99,5 +125,27 @@ class GoogleSheetsApi {
       amount,
       _isIncome == true ? 'income' : 'expense',
     ]);
+  }
+
+  // CALCULATE THE TOTAL INCOME!
+  static double calculateIncome() {
+    double totalIncome = 0;
+    for (int i = 0; i < currentTransactions.length; i++) {
+      if (currentTransactions[i][2] == 'income') {
+        totalIncome += double.parse(currentTransactions[i][1]);
+      }
+    }
+    return totalIncome;
+  }
+
+  // CALCULATE THE TOTAL EXPENSE!
+  static double calculateExpense() {
+    double totalExpense = 0;
+    for (int i = 0; i < currentTransactions.length; i++) {
+      if (currentTransactions[i][2] == 'expense') {
+        totalExpense += double.parse(currentTransactions[i][1]);
+      }
+    }
+    return totalExpense;
   }
 }

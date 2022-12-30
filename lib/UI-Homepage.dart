@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:expensetracker/User-card.dart';
 import 'package:expensetracker/pages/loading-page.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gsheets/gsheets.dart';
 import 'Google-Sheets-API.dart';
+import 'package:expensetracker/News/Newspage.dart';
 
 import 'Trasactions.dart';
 // import 'Transaction.dart';
@@ -63,6 +63,7 @@ class _UIhomePageState extends State<UIhomePage> {
     }
 
     return Scaffold(
+      // backgroundColor: Color.fromRGBO(238, 241, 242, 1),
       backgroundColor: Color.fromRGBO(238, 241, 242, 1),
       appBar: AppBar(
         // leading: Icon(
@@ -98,6 +99,7 @@ class _UIhomePageState extends State<UIhomePage> {
               ),
               Expanded(
                 child: Container(
+                  // color: Colors.deepPurple[100],
                   child: Center(
                     child: Column(
                       children: [
@@ -262,7 +264,7 @@ class _UIhomePageState extends State<UIhomePage> {
                                   ),
 
                                   MaterialButton(
-                                    color: Colors.grey[400],
+                                    color: Colors.grey[700],
                                     child: Text('Enter',
                                         style: TextStyle(color: Colors.white)),
                                     onPressed: () {

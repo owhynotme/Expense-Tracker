@@ -2,6 +2,7 @@ import 'package:expensetracker/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -39,9 +40,26 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
-      body: SafeArea(
+      // backgroundColor: Colors.grey[300],
+      // backgroundColor: Colors.deepPurpleAccent[100],
+      appBar: AppBar(
+          title: Center(
+            child: Text(
+              'LOGIN',
+              style: GoogleFonts.sourceSansPro(
+                  color: Colors.black, fontWeight: FontWeight.w800),
+            ),
+          ),
+          // centerTitle: ,
+          elevation: 0,
+          backgroundColor: Colors.transparent),
+      body: Container(
         //child: Center(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/login-image.jpg'),
+              fit: BoxFit.cover),
+        ),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -49,31 +67,31 @@ class _LoginState extends State<Login> {
                 height: 25,
               ),
               //Welcome Message
-              Text(
-                'Hello!!',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+              // Text(
+              //   'Login',
+              //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              // ),
               SizedBox(
-                height: 15,
+                height: 50,
               ),
-              Text(
-                'Welcome Again',
-                style: TextStyle(fontSize: 20),
-              ),
+              // Text(
+              //   'Welcome Again',
+              //   style: TextStyle(fontSize: 20),
+              // ),
 
               //Email Textfeild
               SizedBox(
-                height: 40,
+                height: 5,
               ),
 
               Image.asset(
                 'assets/images/Login_illus.jpg',
                 // fit: BoxFit.none,
-                height: 300,
-                width: 600,
+                height: 200,
+                width: 250,
               ),
               SizedBox(
-                height: 50,
+                height: 100,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -139,7 +157,7 @@ class _LoginState extends State<Login> {
 
               //Register User
               SizedBox(
-                height: 20,
+                height: 40,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -149,9 +167,12 @@ class _LoginState extends State<Login> {
                     ' Register Now',
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.bold),
-                  )
+                  ),
                 ],
-              )
+              ),
+              SizedBox(
+                height: 400,
+              ),
             ],
           ),
         ),

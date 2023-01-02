@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -10,24 +11,73 @@ class Settings extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.only(left: 100),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            body: Column(
+          children: [
+            Row(
               children: [
-                Text('Signed In ' + user.email!),
-                SizedBox(height: 20),
-                MaterialButton(
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut();
-                  },
-                  color: Colors.red,
-                  child: Text('Sign Out'),
-                )
+                Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: CircleAvatar(
+                      backgroundImage:
+                          AssetImage('assets/images/boy_cropped.jpg')),
+                ),
+                Text(
+                  user.email!,
+                  style: TextStyle(fontSize: 16),
+                ),
               ],
             ),
-          ),
-        ),
+            SizedBox(
+              height: 30,
+            ),
+            GestureDetector(
+              child: Card(
+                elevation: 30,
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Padding(
+                    //   padding: const EdgeInsets.only(top: 8, left: 10),
+                    // child:
+                    Container(
+                      height: 50,
+                      width: 350,
+                      color: Colors.white,
+                      // decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(40)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8, left: 10),
+                        child: Text(
+                          'About Us',
+                          style: GoogleFonts.lato(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 90,
+            ),
+            MaterialButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              color: Colors.black,
+              child: Text(
+                'Sign Out',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+              ),
+            )
+          ],
+        )),
       ),
     );
   }

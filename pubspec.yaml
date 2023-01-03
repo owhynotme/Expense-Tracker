@@ -53,6 +53,8 @@ dev_dependencies:
   google_fonts: ^3.0.1
   gsheets: ^0.4.2
   flutter_native_splash: ^2.2.16
+  cached_network_image: ^3.2.3
+
 
 flutter_native_splash:
 

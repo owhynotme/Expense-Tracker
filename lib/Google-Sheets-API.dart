@@ -56,7 +56,7 @@ class GoogleSheetsApi {
 
   // count the number of rows 2
   static Future countRows2() async {
-    while ((await _worksheet!.values.value(column: 1, row: numberOfNews + 1)) !=
+    while ((await worksheet2!.values.value(column: 1, row: numberOfNews + 1)) !=
         '') {
       numberOfNews++;
     }
@@ -91,21 +91,29 @@ class GoogleSheetsApi {
 
   // load existing notes from the spreadsheet
   static Future loadNews() async {
-    if (_worksheet == null) return;
+    if (worksheet2 == null) return;
 
     for (int i = 1; i < numberOfNews; i++) {
-      final String newsName =
-          await _worksheet!.values.value(column: 1, row: i + 1);
-      // final String newsDesc =
-      //     await _worksheet!.values.value(column: 2, row: i + 1);
+      final String newsUrl =
+          await worksheet2!.values.value(column: 1, row: i + 1);
+      final String newsTitle =
+          await worksheet2!.values.value(column: 2, row: i + 1);
+      final String newsDesc =
+          await worksheet2!.values.value(column: 3, row: i + 1);
 
       if (currentNews.length < numberOfNews) {
         currentNews.add([
-          newsName,
-          // newsDesc,
+          newsUrl,
+          newsTitle,
+          newsDesc,
         ]);
       }
+      // print('News');
+      print(newsUrl);
+      print(newsTitle);
+      print(newsDesc);
     }
+
     // print(currentTransactions);
     // this will stop the circular loading indicator
     loading2 = false;

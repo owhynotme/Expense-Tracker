@@ -1,3 +1,4 @@
+import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:flutter/material.dart';
 
 class blogTile extends StatelessWidget {
@@ -58,7 +59,7 @@ class News extends StatelessWidget {
     // String desc = 'Random tring of code';
     return Scaffold(
       appBar: AppBar(
-        title: Text('API Call'),
+        title: Text('News Insights'),
       ),
       body: Center(
         // child: Container(
@@ -72,17 +73,14 @@ class News extends StatelessWidget {
           child: Container(
             child: ListView.builder(
               // itemCount: articles.length,
-              itemCount: 5,
+              itemCount: GoogleSheetsApi.currentNews.length,
               shrinkWrap: true,
               physics: ClampingScrollPhysics(),
-              itemBuilder: (context, index) {
+              itemBuilder: (BuildContext context, int index) {
                 return blogTile(
-                    imageUrl:
-                        'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png',
-                    title:
-                        'ONGC, Indian Oil Emerge As Top Profit-Making Public Sector Firms In 2021-22',
-                    desc:
-                        'New Delhi: The net profit of operating public sector enterprises jumped 50.87 per cent to ₹ 2.49 lakh crore during 2021-22, with ONGC, Indian Oil Corp, Power Grid, NTPC and SAIL emerging as the top five performers, according to a government survey.The net profit of operating central public sector enterprises (CPSEs) stood at ₹ 1.65 lakh crore in the previous fiscal.');
+                    imageUrl: GoogleSheetsApi.currentNews[index][0],
+                    title: GoogleSheetsApi.currentNews[index][1],
+                    desc: GoogleSheetsApi.currentNews[index][2]);
               },
             ),
           ),

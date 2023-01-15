@@ -4,10 +4,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
-
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
+    String name;
+    if (user.email == 'yashasviwadhwa924@gmail.com') {
+      name = 'Yash';
+    } else {
+      name = 'Tarun';
+    }
     return SafeArea(
       child: Center(
         child: Scaffold(
@@ -22,8 +27,8 @@ class Settings extends StatelessWidget {
                           AssetImage('assets/images/boy_cropped.jpg')),
                 ),
                 Text(
-                  user.email!,
-                  style: TextStyle(fontSize: 16),
+                  name,
+                  style: TextStyle(fontSize: 20),
                 ),
               ],
             ),

@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gsheets/gsheets.dart';
 import 'Google-Sheets-API.dart';
 import 'package:expensetracker/News/Newspage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'Trasactions.dart';
 // import 'Transaction.dart';
@@ -58,6 +59,14 @@ class _UIhomePageState extends State<UIhomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+    String firstName;
+    if (user.email == 'yashasviwadhwa924@gmail.com') {
+      firstName = 'Yashasvi';
+    } else {
+      firstName = 'Tarun';
+    }
+
     if (GoogleSheetsApi.loading == true && timerHasStarted == false) {
       startLoading();
     }
@@ -79,7 +88,7 @@ class _UIhomePageState extends State<UIhomePage> {
         ),
         // centerTitle: true,
         title: Text(
-          'HI TARUN',
+          'HI ' + firstName,
           style: GoogleFonts.notoSerif(
               color: Colors.black, fontWeight: FontWeight.w700),
         ),

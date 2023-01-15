@@ -2,17 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gsheets/gsheets.dart';
 import 'Google-Sheets-API.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class cardUI extends StatelessWidget {
   const cardUI({super.key});
   // cardUI({required this.balance});
   @override
   Widget build(BuildContext context) {
-    final limit = 9000;
+    String firstName;
+    String lastName;
+    final user = FirebaseAuth.instance.currentUser!;
+    if (user.email == 'yashasviwadhwa924@gmail.com') {
+      firstName = 'Yashasvi';
+      lastName = 'Wadhwa';
+    } else {
+      firstName = 'Tarun';
+      lastName = 'Kochhar';
+    }
+    int limit = 20000;
 
-    int balance = (limit -
-            (GoogleSheetsApi.calculateIncome() -
-                GoogleSheetsApi.calculateExpense()))
+    int balance = ((GoogleSheetsApi.calculateIncome() -
+            GoogleSheetsApi.calculateExpense()))
         .toInt();
 
     // int balance = 700;
@@ -87,7 +97,7 @@ class cardUI extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 13, top: 15),
                         child: Text(
-                          '\u{20B9}${9000}',
+                          '\u{20B9}${limit}',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -144,7 +154,7 @@ class cardUI extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0, bottom: 15),
                     child: Text(
-                      'Tarun Kochhar',
+                      firstName + '  ' + lastName,
                       style: GoogleFonts.lato(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

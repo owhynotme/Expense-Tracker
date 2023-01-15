@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:gsheets/gsheets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class GoogleSheetsApi {
   // create credentials
@@ -32,10 +34,22 @@ class GoogleSheetsApi {
   static List<List<dynamic>> currentNews = [];
   static bool loading2 = true;
 
+    String worksheetName='yash';
+
+  void worksheetcheck() {
+    final user = FirebaseAuth.instance.currentUser!;
+    if (user.email == 'yashasviwadhwa924@gmail.com') {
+      worksheetName = 'yash';
+    } else {
+      worksheetName = 'Worksheet1';
+    }
+  }
+
 // initialise the spreadsheet!
   Future init() async {
     final ss = await _gsheets.spreadsheet(spreashsheet_id);
     _worksheet = ss.worksheetByTitle('Worksheet1');
+    // _worksheet = ss.worksheetByTitle(worksheetName);
     worksheet2 = ss.worksheetByTitle('NewsAPI');
     // print(await worksheet2!.values.value(row: 2, column: 1));
     // print(await worksheet2!.values.value(row: 2, column: 2));
@@ -109,9 +123,9 @@ class GoogleSheetsApi {
         ]);
       }
       // print('News');
-      print(newsUrl);
-      print(newsTitle);
-      print(newsDesc);
+      // print(newsUrl);
+      // print(newsTitle);
+      // print(newsDesc);
     }
 
     // print(currentTransactions);

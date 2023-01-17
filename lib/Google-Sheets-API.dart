@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get_storage/get_storage.dart';
 
 class GoogleSheetsApi {
   // create credentials
@@ -34,27 +36,32 @@ class GoogleSheetsApi {
   static List<List<dynamic>> currentNews = [];
   static bool loading2 = true;
 
-    String worksheetName='yash';
-
-  void worksheetcheck() {
-    final user = FirebaseAuth.instance.currentUser!;
-    if (user.email == 'yashasviwadhwa924@gmail.com') {
-      worksheetName = 'yash';
-    } else {
-      worksheetName = 'Worksheet1';
-    }
-  }
+  // late String worksheetName;
+  // String worksheetcheck() {
+  //   if (user.email == 'yashasviwadhwa924@gmail.com') {
+  //     return 'yash';
+  //   } else {
+  //     return 'Worksheet1';
+  //   }
+  //   // return worksheetName;
+  // }
 
 // initialise the spreadsheet!
+  final wname = GetStorage();
   Future init() async {
+    // String worksheetName;
+    // worksheetName = wname.read('workname');
+
     final ss = await _gsheets.spreadsheet(spreashsheet_id);
-    _worksheet = ss.worksheetByTitle('Worksheet1');
+    _worksheet = ss.worksheetByTitle(wname.read('workname'));
+    // _worksheet = ss.worksheetByTitle('tarun');
     // _worksheet = ss.worksheetByTitle(worksheetName);
     worksheet2 = ss.worksheetByTitle('NewsAPI');
     // print(await worksheet2!.values.value(row: 2, column: 1));
     // print(await worksheet2!.values.value(row: 2, column: 2));
     countRows();
     countRows2();
+    // print(wname.read('workname'));
   }
 
   // count the number of rows 1

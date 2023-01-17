@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:expensetracker/Google-Sheets-API.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:expensetracker/About-Us-View.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
+    // Worksheet name
+
+    
+
     String name;
     if (user.email == 'yashasviwadhwa924@gmail.com') {
       name = 'Yash';
@@ -36,8 +43,15 @@ class Settings extends StatelessWidget {
               height: 30,
             ),
             GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Aboutus(),
+                    ));
+              },
               child: Card(
-                elevation: 30,
+                elevation: 10,
                 child: Column(
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   // mainAxisAlignment: MainAxisAlignment.center,
@@ -49,8 +63,6 @@ class Settings extends StatelessWidget {
                       height: 50,
                       width: 350,
                       color: Colors.white,
-                      // decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(40)),
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8, left: 10),
                         child: Text(
@@ -68,7 +80,7 @@ class Settings extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 90,
+              height: 170,
             ),
             MaterialButton(
               onPressed: () {
@@ -80,6 +92,17 @@ class Settings extends StatelessWidget {
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
+            ),
+            SizedBox(
+              height: 300,
+            ),
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Version 2.1.7 '),
+                Icon(Icons.favorite_border),
+              ],
             )
           ],
         )),

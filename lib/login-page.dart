@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'Google-Sheets-API.dart';
+import 'package:get_storage/get_storage.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class _LoginState extends State<Login> {
   final _passwordcontroller = TextEditingController();
 
   Future signIn() async {
+    // getName('yash');
     // Loading Circle
     showDialog(
         context: context,
@@ -31,14 +34,37 @@ class _LoginState extends State<Login> {
     Navigator.of(context).pop();
   }
 
-  void dispose() {
-    _emailcontroller.dispose();
-    _passwordcontroller.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   _emailcontroller.dispose();
+  //   _passwordcontroller.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final wname = GetStorage();
+    if (FirebaseAuth.instance.currentUser?.email! == 'yashasviwadhwa924@gmail.com') {
+      wname.write('workname', 'yash');
+      if (wname.read('workname') != null) {
+        wname.remove('workname');
+        wname.write('workname', 'yash');
+      }
+    } else if (FirebaseAuth.instance.currentUser?.email! == 'tarunk@icloud.com') {
+      if (wname.read('workname') != null) {
+        wname.remove('workname');
+        wname.write('workname', 'tarun');
+      }
+    }
+
+    // else {
+    //   wname.remove('workname');
+    //   wname.write('workname', 'tarun');
+    // }
+
+    // print(_emailcontroller.text);
+    print(wname.read('workname'));
+    // print(FirebaseAuth.instance.currentUser?.email!);
+
     return Scaffold(
       // backgroundColor: Colors.grey[300],
       // backgroundColor: Colors.deepPurpleAccent[100],

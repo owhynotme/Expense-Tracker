@@ -53,15 +53,11 @@ class GoogleSheetsApi {
     // worksheetName = wname.read('workname');
 
     final ss = await _gsheets.spreadsheet(spreashsheet_id);
-    _worksheet = ss.worksheetByTitle(wname.read('workname'));
-    // _worksheet = ss.worksheetByTitle('tarun');
-    // _worksheet = ss.worksheetByTitle(worksheetName);
+    _worksheet = ss.worksheetByTitle('tarun');
     worksheet2 = ss.worksheetByTitle('NewsAPI');
-    // print(await worksheet2!.values.value(row: 2, column: 1));
-    // print(await worksheet2!.values.value(row: 2, column: 2));
+
     countRows();
-    countRows2();
-    // print(wname.read('workname'));
+    // countRows2();
   }
 
   // count the number of rows 1
@@ -76,14 +72,14 @@ class GoogleSheetsApi {
   }
 
   // count the number of rows 2
-  static Future countRows2() async {
-    while ((await worksheet2!.values.value(column: 1, row: numberOfNews + 1)) !=
-        '') {
-      numberOfNews++;
-    }
+  // static Future countRows2() async {
+  //   while ((await worksheet2!.values.value(column: 1, row: numberOfNews + 1)) !=
+  //       '') {
+  //     numberOfNews++;
+  //   }
     // now we know how many notes to load, now let's load them!
-    loadNews();
-  }
+  //   loadNews();
+  // }
 
   // load existing notes from the spreadsheet
   static Future loadTransactions() async {
@@ -111,34 +107,31 @@ class GoogleSheetsApi {
   }
 
   // load existing notes from the spreadsheet
-  static Future loadNews() async {
-    if (worksheet2 == null) return;
+  // static Future loadNews() async {
+  //   if (worksheet2 == null) return;
 
-    for (int i = 1; i < numberOfNews; i++) {
-      final String newsUrl =
-          await worksheet2!.values.value(column: 1, row: i + 1);
-      final String newsTitle =
-          await worksheet2!.values.value(column: 2, row: i + 1);
-      final String newsDesc =
-          await worksheet2!.values.value(column: 3, row: i + 1);
+  //   for (int i = 1; i < numberOfNews; i++) {
+  //     final String newsUrl =
+  //         await worksheet2!.values.value(column: 1, row: i + 1);
+  //     final String newsTitle =
+  //         await worksheet2!.values.value(column: 2, row: i + 1);
+  //     final String newsDesc =
+  //         await worksheet2!.values.value(column: 3, row: i + 1);
 
-      if (currentNews.length < numberOfNews) {
-        currentNews.add([
-          newsUrl,
-          newsTitle,
-          newsDesc,
-        ]);
-      }
-      // print('News');
-      // print(newsUrl);
-      // print(newsTitle);
-      // print(newsDesc);
-    }
+  //     if (currentNews.length < numberOfNews) {
+  //       currentNews.add([
+  //         newsUrl,
+  //         newsTitle,
+  //         newsDesc,
+  //       ]);
+  //     }
+     
+  //   }
 
-    // print(currentTransactions);
-    // this will stop the circular loading indicator
-    loading2 = false;
-  }
+  //   // print(currentTransactions);
+  //   // this will stop the circular loading indicator
+  //   loading2 = false;
+  // }
 
   // insert a new transaction
   static Future insert(String name, String amount, bool _isIncome) async {

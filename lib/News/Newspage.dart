@@ -61,31 +61,25 @@ class News extends StatelessWidget {
       appBar: AppBar(
         title: Text('News Insights'),
       ),
-      body: Center(
-        // child: Container(
-        //   height: 300,
-        //   width: 350,
-        //   decoration: BoxDecoration(
-        //       color: Colors.grey, borderRadius: BorderRadius.circular(20)),
-        //   child: Center(child: Text('Hello')),
-        // ),
-        child: SingleChildScrollView(
-          child: Container(
-            child: ListView.builder(
-              // itemCount: articles.length,
-              itemCount: GoogleSheetsApi.currentNews.length,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return blogTile(
-                    imageUrl: GoogleSheetsApi.currentNews[index][0],
-                    title: GoogleSheetsApi.currentNews[index][1],
-                    desc: GoogleSheetsApi.currentNews[index][2]);
-              },
-            ),
-          ),
-        ),
-      ),
+      // body: Center(
+        
+      //   child: SingleChildScrollView(
+      //     child: Container(
+      //       child: ListView.builder(
+      //         // itemCount: articles.length,
+      //         itemCount: GoogleSheetsApi.currentNews.length,
+      //         shrinkWrap: true,
+      //         physics: ClampingScrollPhysics(),
+      //         itemBuilder: (BuildContext context, int index) {
+      //           return blogTile(
+      //               imageUrl: GoogleSheetsApi.currentNews[index][0],
+      //               title: GoogleSheetsApi.currentNews[index][1],
+      //               desc: GoogleSheetsApi.currentNews[index][2]);
+      //         },
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

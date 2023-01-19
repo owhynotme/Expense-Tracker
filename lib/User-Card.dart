@@ -20,10 +20,15 @@ class cardUI extends StatelessWidget {
       lastName = 'Kochhar';
     }
     int limit = 20000;
-
-    int balance = ((GoogleSheetsApi.calculateIncome() -
-            GoogleSheetsApi.calculateExpense()))
-        .toInt();
+    limit -= (GoogleSheetsApi.calculateExpense().toInt());
+    print('Expense \n');
+    print(limit);
+    limit += (GoogleSheetsApi.calculateIncome().toInt());
+    print('Income \n');
+    print(limit);
+    int balance = limit;
+    print('Balance \n');
+    print(limit);
 
     // int balance = 700;
     //Low Balance Check
@@ -76,7 +81,7 @@ class cardUI extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 10),
                         child: Image.asset(
                           'assets/images/mastercard.jpg',
-                          height: 80,
+                          height: 74,
                           width: 80,
                         ),
                       ),
@@ -97,7 +102,8 @@ class cardUI extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 13, top: 15),
                         child: Text(
-                          '\u{20B9}${limit}',
+                          // '\u{20B9}${limit}',
+                          '20000',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

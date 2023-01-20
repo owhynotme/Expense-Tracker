@@ -5,11 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'UI-Homepage.dart';
 import 'package:expensetracker/News/Newspage.dart';
 import 'package:expensetracker/Signup/sign_up.dart';
-// import 'package:expensetracker/Signup/si ';
-// import 'package:expensetracker/News/Newspage.dart';
-// import 'package:expense/pages/Home.dart';
-// import 'package:temp/pages/Search.dart';
-// import 'package:temp/pages/Settings.dart';
+import 'package:expensetracker/pages/Chart-Page.dart';
 
 class NavPage extends StatefulWidget {
   @override
@@ -26,11 +22,9 @@ class _NavPageState extends State<NavPage> {
   }
 
   final List<Widget> _pages = [
-    // Homie(),
-    // Search(),
     UIhomePage(),
-    // SignUp(),
     News(),
+    ChartData(),
     Settings(),
     // Center(child: Text('Settings Page'),),
   ];
@@ -54,22 +48,25 @@ class _NavPageState extends State<NavPage> {
               selectedIndex: _customIndex,
               onTabChange: _navigateBottomBar,
               tabs: [
+                // Home Page
                 GButton(
                   icon: Icons.home,
                   text: 'Home',
                 ),
 
-                // Like Page
-
-                // GButton(
-                //   icon: Icons.favorite,
-                //   text: 'Likes',
-                // ),
+                // News Page
 
                 GButton(
                   icon: Icons.newspaper,
                   text: 'Insights',
                 ),
+                // Pie Chart
+                GButton(
+                  icon: Icons.pie_chart,
+                  text: 'Likes',
+                ),
+
+                // Settings Page
                 GButton(
                   icon: Icons.settings,
                   text: 'Settings',

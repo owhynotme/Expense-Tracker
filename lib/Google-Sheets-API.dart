@@ -77,7 +77,7 @@ class GoogleSheetsApi {
   //       '') {
   //     numberOfNews++;
   //   }
-    // now we know how many notes to load, now let's load them!
+  // now we know how many notes to load, now let's load them!
   //   loadNews();
   // }
 
@@ -106,6 +106,31 @@ class GoogleSheetsApi {
     loading = false;
   }
 
+  // final categoryamt = GetStorage();
+
+  Future findCategory() async {
+    int softwareamt = 0, scount = 0, icount = 0, investamt = 0;
+    if (_worksheet == null) return;
+    for (int i = 1; i < numberOfTransactions; i++) {
+      final categoryname = _worksheet!.values.value(column: 4, row: i + 1);
+      final amount = _worksheet!.values.value(column: 2, row: i + 1);
+      if (categoryname == 'software') {
+        scount++;
+        softwareamt = amount as int;
+      }
+      if (categoryname == 'invest') {
+        icount++;
+        investamt = amount as int;
+      }
+    }
+    // categoryamt.write('software', scount);
+    print('Software ' + scount.toString() + '\n');
+    print('Software Amount' + softwareamt.toString() + '\n');
+    print('Invest ' + icount.toString() + '\n');
+    print('Invest Amount' + investamt.toString() + '\n');
+    print(findCategory());
+  }
+
   // load existing notes from the spreadsheet
   // static Future loadNews() async {
   //   if (worksheet2 == null) return;
@@ -125,7 +150,7 @@ class GoogleSheetsApi {
   //         newsDesc,
   //       ]);
   //     }
-     
+
   //   }
 
   //   // print(currentTransactions);
@@ -134,7 +159,8 @@ class GoogleSheetsApi {
   // }
 
   // insert a new transaction
-  static Future insert(String name, String amount, bool _isIncome) async {
+  static Future insert(
+      String name, String amount, bool _isIncome, String category) async {
     if (_worksheet == null) return;
     numberOfTransactions++;
     currentTransactions.add([
@@ -146,6 +172,7 @@ class GoogleSheetsApi {
       name,
       amount,
       _isIncome == true ? 'income' : 'expense',
+      category,
     ]);
   }
 

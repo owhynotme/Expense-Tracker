@@ -20,6 +20,17 @@ class UIhomePage extends StatefulWidget {
 }
 
 class _UIhomePageState extends State<UIhomePage> {
+  List<String> categories = <String>[
+    'Shoping',
+    'Study',
+    'Gadget',
+    'Invest',
+    'Software',
+    'Commute',
+    'Miscellaneus'
+  ];
+  String dropValue = 'Miscellaneus';
+
   // wait for the data to be fetched from google sheets
   bool timerHasStarted = false;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -53,6 +64,7 @@ class _UIhomePageState extends State<UIhomePage> {
       enter_Transaction.text,
       enter_Amount.text,
       isIncome,
+      dropValue,
     );
     setState(() {});
   }
@@ -220,25 +232,65 @@ class _UIhomePageState extends State<UIhomePage> {
                                         hintText: 'Enter Transaction Name',
                                         border: OutlineInputBorder()),
                                     controller: enter_Transaction,
+                                    
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(left: 5),
+                                        child: Text(
+                                          'Category',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 16),
+                                          // textAlign: TextAlign.right,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 320,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 4),
+                                        margin: EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                                color: Colors.black, width: 1)),
+                                        child: DropdownButtonHideUnderline(
+                                          child: DropdownButton<String>(
+                                            isExpanded: true,
+                                            onChanged: (String? newValue) {
+                                              setState(() {
+                                                dropValue = newValue!;
+                                              });
+                                            },
+                                            value: dropValue,
+                                            items: categories
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value),
+                                              );
+                                            }).toList(),
+                                            icon: Icon(
+                                              Icons.arrow_drop_down_circle,
+                                              color: Colors.deepPurple,
+                                            ),
+                                            dropdownColor:
+                                                Colors.deepPurple.shade50,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
                             actions: <Widget>[
-                              // Row(
-                              //   children: [
-                              //     Checkbox(
-                              //       value: isChecked,
-                              //       onChanged: (checked) {
-                              //         setState(
-                              //           () {
-                              //             isChecked = checked!;
-                              //           },
-                              //         );
-                              //       },
-                              //     )
-                              //   ],
-                              // ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 // crossAxisAlignment: CrossAxisAlignment.end,
@@ -300,6 +352,7 @@ class _UIhomePageState extends State<UIhomePage> {
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                     ),
+                  
                   ),
                 ),
               ),

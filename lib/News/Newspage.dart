@@ -1,6 +1,7 @@
 import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:flutter/material.dart';
 
+
 class blogTile extends StatelessWidget {
   final String imageUrl, title, desc;
   blogTile({required this.imageUrl, required this.title, required this.desc});
@@ -62,7 +63,7 @@ class News extends StatelessWidget {
         title: Text('News Insights'),
       ),
       // body: Center(
-        
+
       //   child: SingleChildScrollView(
       //     child: Container(
       //       child: ListView.builder(

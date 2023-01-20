@@ -21,14 +21,14 @@ class cardUI extends StatelessWidget {
     }
     int limit = 20000;
     limit -= (GoogleSheetsApi.calculateExpense().toInt());
-    print('Expense \n');
-    print(limit);
+    // print('Expense \n');
+    // print(limit);
     limit += (GoogleSheetsApi.calculateIncome().toInt());
-    print('Income \n');
-    print(limit);
+    // print('Income \n');
+    // print(limit);
     int balance = limit;
-    print('Balance \n');
-    print(limit);
+    // print('Balance \n');
+    // print(limit);
 
     // int balance = 700;
     //Low Balance Check

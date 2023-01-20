@@ -6,19 +6,29 @@ import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:expensetracker/About-Us-View.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
   const Settings({super.key});
+
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
+
     // Worksheet name
 
-    List<Map> Categories = [
-      {'name': 'Study', 'iconPath': 'assets/icons/study.png'},
-      {'name': 'Shopping', 'iconPath': 'assets/icons/shoppingicon.png'},
-      {'name': 'Miscellaneus', 'iconPath': 'assets/icons/miscellaneus.png'},
-      {'name': 'Invest', 'iconPath': 'assets/icons/invest.png'},
-    ];
+    // List<Map> Categories = [
+    //   {'name': 'Shopping', 'iconPath': 'assets/icons/shoppingicon.png'},
+    //   {'name': 'Study', 'iconPath': 'assets/icons/study.png'},
+    //   {'name': 'Gadget', 'iconPath': 'assets/icons/gadget.png'},
+    //   {'name': 'Invest', 'iconPath': 'assets/icons/invest.png'},
+    //   {'name': 'Software', 'iconPath': 'assets/icons/software.png'},
+    //   {'name': 'Commute', 'iconPath': 'assets/icons/commute.png'},
+    //   {'name': 'Miscellaneus', 'iconPath': 'assets/icons/miscellaneus.png'},
+    // ];
 
     String name;
     if (user.email == 'yashasviwadhwa924@gmail.com') {
@@ -86,7 +96,7 @@ class Settings extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 170,
+              height: 240,
             ),
             MaterialButton(
               onPressed: () {
@@ -99,76 +109,18 @@ class Settings extends StatelessWidget {
                     TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
               ),
             ),
-            SingleChildScrollView(
-              child: Column(
+            SizedBox(
+              height: 200,
+            ),
+            Expanded(
+              child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Categories',
-                    style: TextStyle(fontSize: 15),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  // categoryLayout()
-
-                  Container(
-                    height: 150,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: Categories.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: Column(
-                            children: [
-                              Container(
-                                // height: 100,
-                                // width: 150,
-                                padding: EdgeInsets.all(10),
-                                margin: EdgeInsets.only(left: 20),
-                                decoration: BoxDecoration(
-                                    color: Colors.deepOrangeAccent),
-                                child: Image.asset(
-                                  Categories[index]['iconPath'],
-                                  height: 40,
-                                  width: 40,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16),
-                                child: Text(
-                                  // margin:EdgeInsets.only(left:10),
-                                  Categories[index]['name'],
-                                  style: TextStyle(color: Colors.black),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  )
+                  Text('Version 2.1.7 '),
+                  Icon(Icons.favorite_border),
                 ],
               ),
-            ),
-            // SizedBox(
-            //   height: 200,
-            // ),
-            Row(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Version 2.1.7 '),
-                Icon(Icons.favorite_border),
-              ],
             )
           ],
         )),

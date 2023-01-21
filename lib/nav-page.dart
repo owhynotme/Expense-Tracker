@@ -63,7 +63,7 @@ class _NavPageState extends State<NavPage> {
                 // Pie Chart
                 GButton(
                   icon: Icons.pie_chart,
-                  text: 'Likes',
+                  text: 'Analysis',
                 ),
 
                 // Settings Page

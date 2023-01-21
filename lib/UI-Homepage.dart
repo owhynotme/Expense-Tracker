@@ -21,13 +21,12 @@ class UIhomePage extends StatefulWidget {
 
 class _UIhomePageState extends State<UIhomePage> {
   List<String> categories = <String>[
-    'Shoping',
-    'Study',
-    'Gadget',
-    'Invest',
-    'Software',
-    'Commute',
-    'Miscellaneus'
+    'shoping',
+    'gadget',
+    'invest',
+    'software',
+    'commute',
+    'miscellaneus'
   ];
   String dropValue = 'Miscellaneus';
 
@@ -232,7 +231,6 @@ class _UIhomePageState extends State<UIhomePage> {
                                         hintText: 'Enter Transaction Name',
                                         border: OutlineInputBorder()),
                                     controller: enter_Transaction,
-                                    
                                   ),
                                   SizedBox(
                                     height: 10,
@@ -352,7 +350,6 @@ class _UIhomePageState extends State<UIhomePage> {
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                     ),
-                  
                   ),
                 ),
               ),

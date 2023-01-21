@@ -3,6 +3,7 @@ import 'package:gsheets/gsheets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
+// import 'package:expensetracker/pages/Chart-Page.dart';
 
 class GoogleSheetsApi {
   // create credentials
@@ -29,6 +30,7 @@ class GoogleSheetsApi {
   // some variables to keep track of..
   static int numberOfTransactions = 0;
   static List<List<dynamic>> currentTransactions = [];
+  static List<List<dynamic>> categoriesType = [];
   static bool loading = true;
 
   // Variable
@@ -80,6 +82,8 @@ class GoogleSheetsApi {
   // now we know how many notes to load, now let's load them!
   //   loadNews();
   // }
+    final categoryamt = GetStorage();
+
 
   // load existing notes from the spreadsheet
   static Future loadTransactions() async {
@@ -92,6 +96,8 @@ class GoogleSheetsApi {
           await _worksheet!.values.value(column: 2, row: i + 1);
       final String transactionType =
           await _worksheet!.values.value(column: 3, row: i + 1);
+      final String categoryName =
+          await _worksheet!.values.value(column: 4, row: i + 1);
 
       if (currentTransactions.length < numberOfTransactions) {
         currentTransactions.add([
@@ -99,37 +105,41 @@ class GoogleSheetsApi {
           transactionAmount,
           transactionType,
         ]);
+      
+        categoriesType.add([
+          categoryName,
+          transactionAmount,
+        ]);
       }
     }
-    // print(currentTransactions);
+    print(categoriesType);
     // this will stop the circular loading indicator
     loading = false;
   }
 
-  // final categoryamt = GetStorage();
 
-  Future findCategory() async {
-    int softwareamt = 0, scount = 0, icount = 0, investamt = 0;
-    if (_worksheet == null) return;
-    for (int i = 1; i < numberOfTransactions; i++) {
-      final categoryname = _worksheet!.values.value(column: 4, row: i + 1);
-      final amount = _worksheet!.values.value(column: 2, row: i + 1);
-      if (categoryname == 'software') {
-        scount++;
-        softwareamt = amount as int;
-      }
-      if (categoryname == 'invest') {
-        icount++;
-        investamt = amount as int;
-      }
-    }
-    // categoryamt.write('software', scount);
-    print('Software ' + scount.toString() + '\n');
-    print('Software Amount' + softwareamt.toString() + '\n');
-    print('Invest ' + icount.toString() + '\n');
-    print('Invest Amount' + investamt.toString() + '\n');
-    print(findCategory());
-  }
+  // Future findCategory() async {
+  //   int softwareamt = 0, scount = 0, icount = 0, investamt = 0;
+  //   if (_worksheet == null) return;
+  //   for (int i = 1; i < numberOfTransactions; i++) {
+  //     final categoryname = _worksheet!.values.value(column: 4, row: i + 1);
+  //     final amount = _worksheet!.values.value(column: 2, row: i + 1);
+  //     if (categoryname == 'software') {
+  //       scount++;
+  //       softwareamt = amount as int;
+  //     }
+  //     if (categoryname == 'invest') {
+  //       icount++;
+  //       investamt = amount as int;
+  //     }
+  //   }
+  //   // categoryamt.write('software', scount);
+  //   print('Software ' + scount.toString() + '\n');
+  //   print('Software Amount' + softwareamt.toString() + '\n');
+  //   print('Invest ' + icount.toString() + '\n');
+  //   print('Invest Amount' + investamt.toString() + '\n');
+  //   print(findCategory());
+  // }
 
   // load existing notes from the spreadsheet
   // static Future loadNews() async {

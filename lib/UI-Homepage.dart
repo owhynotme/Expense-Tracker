@@ -26,9 +26,9 @@ class _UIhomePageState extends State<UIhomePage> {
     'invest',
     'software',
     'commute',
-    'miscellaneus'
+    'miscellaneus',
   ];
-  String dropValue = 'Miscellaneus';
+  String dropValue = 'miscellaneus';
 
   // wait for the data to be fetched from google sheets
   bool timerHasStarted = false;
@@ -255,8 +255,7 @@ class _UIhomePageState extends State<UIhomePage> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            border: Border.all(
-                                                color: Colors.black, width: 1)),
+                                            border: Border.all(width: 1)),
                                         child: DropdownButtonHideUnderline(
                                           child: DropdownButton<String>(
                                             isExpanded: true,

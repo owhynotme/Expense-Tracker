@@ -1,7 +1,6 @@
 import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:flutter/material.dart';
 
-
 class blogTile extends StatelessWidget {
   final String imageUrl, title, desc;
   blogTile({required this.imageUrl, required this.title, required this.desc});
@@ -61,26 +60,37 @@ class News extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('News Insights'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        // centerTitle: true,
+        leading: Padding(
+          padding: const EdgeInsets.all(7),
+          child: Container(
+            child: Image.asset(
+              'assets/icons/news2.png',
+            ),
+          ),
+        ),
       ),
-      // body: Center(
-
-      //   child: SingleChildScrollView(
-      //     child: Container(
-      //       child: ListView.builder(
-      //         // itemCount: articles.length,
-      //         itemCount: GoogleSheetsApi.currentNews.length,
-      //         shrinkWrap: true,
-      //         physics: ClampingScrollPhysics(),
-      //         itemBuilder: (BuildContext context, int index) {
-      //           return blogTile(
-      //               imageUrl: GoogleSheetsApi.currentNews[index][0],
-      //               title: GoogleSheetsApi.currentNews[index][1],
-      //               desc: GoogleSheetsApi.currentNews[index][2]);
-      //         },
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            child: ListView.builder(
+              // itemCount: articles.length,
+              itemCount: GoogleSheetsapi2.currentNews.length,
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) {
+                return blogTile(
+                    imageUrl: GoogleSheetsapi2.currentNews[index][0],
+                    title: GoogleSheetsapi2.currentNews[index][1],
+                    desc: GoogleSheetsapi2.currentNews[index][2]);
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -20,10 +20,16 @@ class showData extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Spend Analysis'),
-        centerTitle: true,
+        // centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
+        leading: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Container(
+            child: Image.asset('assets/icons/analysis.png'),
+          ),
+        ),
       ),
       body: Container(
         child: Column(

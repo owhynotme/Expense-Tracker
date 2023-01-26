@@ -63,14 +63,18 @@ class GoogleSheetsapi2 {
           await worksheet2!.values.value(column: 2, row: i + 1);
       final String newsDesc =
           await worksheet2!.values.value(column: 3, row: i + 1);
+      // final String articleLink =
+      //     await worksheet2!.values.value(column: 4, row: i + 1);
 
       if (currentNews.length < numberOfNews) {
         currentNews.add([
           newsUrl,
           newsTitle,
           newsDesc,
+          // articleLink,
         ]);
       }
+      // print(articleLink);
     }
 
     // print(currentNews);
@@ -115,9 +119,11 @@ class GoogleSheetsApi {
   static bool loading2 = true;
 
 // initialise the spreadsheet!
+  final wname = GetStorage();
   Future init() async {
     final ss = await _gsheets.spreadsheet(spreashsheet_id);
-    _worksheet = ss.worksheetByTitle('tarun');
+    // _worksheet = ss.worksheetByTitle('tarun');
+    _worksheet = ss.worksheetByTitle(wname.read('workname'));
     // worksheet2 = ss.worksheetByTitle('NewsAPI');
 
     countRows();

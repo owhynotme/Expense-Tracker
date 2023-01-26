@@ -41,9 +41,13 @@ class _UIhomePageState extends State<UIhomePage> {
   void startLoading() {
     timerHasStarted = true;
     Timer.periodic(Duration(seconds: 1), (timer) {
-      if (GoogleSheetsApi.loading == false) {
-        setState(() {});
-        timer.cancel();
+      try {
+        if (GoogleSheetsApi.loading == false) {
+          setState(() {});
+          timer.cancel();
+        }
+      } catch (e) {
+        print(e);
       }
     });
   }

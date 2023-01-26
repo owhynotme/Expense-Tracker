@@ -1,9 +1,15 @@
 import 'package:expensetracker/Google-Sheets-API.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/loading-page.dart';
+
 class blogTile extends StatelessWidget {
   final String imageUrl, title, desc;
-  blogTile({required this.imageUrl, required this.title, required this.desc});
+  blogTile({
+    required this.imageUrl,
+    required this.title,
+    required this.desc,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +56,7 @@ class blogTile extends StatelessWidget {
 }
 
 class News extends StatelessWidget {
-  final String newsName = 'Holla';
+  // final String newsName = 'Holla';
 
   // News({required this.newsName});
 
@@ -76,18 +82,22 @@ class News extends StatelessWidget {
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            child: ListView.builder(
-              // itemCount: articles.length,
-              itemCount: GoogleSheetsapi2.currentNews.length,
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return blogTile(
-                    imageUrl: GoogleSheetsapi2.currentNews[index][0],
-                    title: GoogleSheetsapi2.currentNews[index][1],
-                    desc: GoogleSheetsapi2.currentNews[index][2]);
-              },
-            ),
+            child: GoogleSheetsApi.loading == true
+                ? loadingind()
+                : ListView.builder(
+                    // itemCount: articles.length,
+                    itemCount: GoogleSheetsapi2.currentNews.length,
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return blogTile(
+                        imageUrl: GoogleSheetsapi2.currentNews[index][0],
+                        title: GoogleSheetsapi2.currentNews[index][1],
+                        desc: GoogleSheetsapi2.currentNews[index][2],
+                        // articleurl: GoogleSheetsapi2.currentNews[index][3],
+                      );
+                    },
+                  ),
           ),
         ),
       ),

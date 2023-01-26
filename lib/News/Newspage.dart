@@ -34,7 +34,7 @@ class blogTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 13, left: 10),
               child: Container(
-                height: 66,
+                height: 74,
                 child: Text(
                   desc,
                   style: TextStyle(color: Colors.black54),

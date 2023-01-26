@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Google-Sheets-API.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:expensetracker/Signup/sign_up.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -43,13 +44,15 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final wname = GetStorage();
-    if (FirebaseAuth.instance.currentUser?.email! == 'yashasviwadhwa924@gmail.com') {
+    if (FirebaseAuth.instance.currentUser?.email! ==
+        'yashasviwadhwa924@gmail.com') {
       wname.write('workname', 'yash');
       if (wname.read('workname') != null) {
         wname.remove('workname');
         wname.write('workname', 'yash');
       }
-    } else if (FirebaseAuth.instance.currentUser?.email! == 'tarunk@icloud.com') {
+    } else if (FirebaseAuth.instance.currentUser?.email! ==
+        'tarunk@icloud.com') {
       if (wname.read('workname') != null) {
         wname.remove('workname');
         wname.write('workname', 'tarun');
@@ -189,10 +192,18 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Not a member? '),
-                  Text(
-                    ' Register Now',
-                    style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.bold),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUp()));
+                    },
+                    child: Text(
+                      ' Register Now',
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -207,7 +218,3 @@ class _LoginState extends State<Login> {
     );
   }
 }
-
-
-
-

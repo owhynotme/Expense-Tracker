@@ -28,6 +28,7 @@ class _SignUpState extends State<SignUp> {
           elevation: 0,
           title: const Text("Sign up",
               style: TextStyle(
+                color: Colors.black,
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
               )),
@@ -47,7 +48,7 @@ class _SignUpState extends State<SignUp> {
             child: Column(children: [
               //  Image.asset('asset/Login_illus.jpg'),s
               SizedBox(
-                height: 25,
+                height: 200,
               ),
               reusableTextField("Enter UserName", Icons.person_outline, false,
                   _userNameTextController),
